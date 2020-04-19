@@ -11,6 +11,6 @@ class Genre extends Model
 
     public function books()
     {
-        return $this->hasMany('App\Book');
+        return $this->hasMany('App\BookGood');
     }
 }

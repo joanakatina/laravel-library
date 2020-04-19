@@ -28,9 +28,17 @@ Route::get('/contacts', function () {
 Route::get('/admin', function () {
     return view('admin.dashboard'); //naršyklės lange įvedus svetainės adresą + '/admin' (pvz., http://localhost:8000/admin) bus matomas vaizdas dashboard, esantis kataloge admin
 });
-Route::get('/admin/authors', function () {
+/*Route::get('/admin/authors', function () {
     return view('admin.authors.index');
-});
+});*/
+Route::get('/authors', 'AuthorsController');
+Route::get('/admin/authors', 'Admin\AuthorsController@index');
+Route::get('/admin/authors/create', 'Admin\AuthorsController@create');
+Route::post('/admin/authors', 'Admin\AuthorsController@store');
+Route::get('/admin/authors/{id}', 'Admin\AuthorsController@show');
+Route::get('/admin/authors/{id}/edit', 'Admin\AuthorsController@edit');
+Route::patch('/admin/authors/{id}', 'Admin\AuthorsController@update');
+Route::delete('/admin/authors/{id}', 'Admin\AuthorsController@destroy');
 
 Auth::routes();
 
