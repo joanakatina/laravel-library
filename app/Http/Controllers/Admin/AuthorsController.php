@@ -15,8 +15,8 @@ class AuthorsController extends Controller
      */
     public function index()
     {
-        $authors = Author::all();   // naudojam modelį Author; ši eilutė įvykdo SQL užklausą "SELECT * FROM `authors`"
-        return view('admin.authors.index', compact('authors'));     // nurodom kokiame vaizde bus atvaizduojami duomenys ir perduodam duomenis (masyvą authors) vaizdui
+        $authors = Author::all();
+        return view('admin.authors.index', compact('authors'));
     }
 
     /**
@@ -45,8 +45,9 @@ class AuthorsController extends Controller
             'gender' => 'required'
         ]);
 
-        Author::create($request->all());    // išsaugom duomenis DB
+        Author::create($request->all());    // įvykdoma SQL užklausa, kuri išsaugo duomenis lentelėje
 
+        // grįžtama į nuorodą 'admin/authors'; sesijoje išsaugome pranešimą 'success', kurio reikšmė yra tekstas 'Author added successfully.'
         return redirect('admin/authors')->with('success', 'Author added successfully.');
     }
 
@@ -58,7 +59,7 @@ class AuthorsController extends Controller
      */
     public function show($id)
     {
-        $author = Author::findOrFail($id);
+        $author = Author::findOrFail($id);  // įvykdoma SQL užklausa, kuri išrenka vieną įrašą iš lentelės pagal ID reikšmę
         return view('admin.authors.show', compact('author'));
     }
 
@@ -71,7 +72,6 @@ class AuthorsController extends Controller
     public function edit($id)
     {
         $author = Author::findOrFail($id);
-
         return view('admin.authors.form', compact('author'));
     }
 
@@ -92,7 +92,7 @@ class AuthorsController extends Controller
         ]);
 
         $author = Author::findOrFail($id);
-        $author->update($request->all());
+        $author->update($request->all());   // įvykdoma SQL užklausa, kuri atnaujina duomenis DB
 
         return redirect('admin/authors')->with('success', 'Author updated successfully.');
     }
@@ -106,8 +106,7 @@ class AuthorsController extends Controller
     public function destroy($id)
     {
         $author = Author::findOrFail($id);
-
-        $author->delete();
+        $author->delete();  // įvykdoma SQL užklausa, kuri pašalina duomenis iš DB
 
         return redirect('admin/authors')->with('success', 'Book deleted successfully.');
     }

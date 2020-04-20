@@ -9,28 +9,17 @@
         </div>
         <div class="card-body">
             @if(Session::has('success'))
-                <div class="mt-3 alert alert-success alert-dismissible fade show" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    {{ Session::get('success') }}
-                    @php
-                        Session::forget('success');
-                    @endphp
-                </div>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                {{ Session::get('success') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                @php
+                    Session::forget('success');
+                @endphp
+            </div>
             @endif
 
-            @if(Session::has('danger'))
-                <div class="mt-3 alert alert-danger alert-dismissible fade show" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    {{ Session::get('danger') }}
-                    @php
-                        Session::forget('danger');
-                    @endphp
-                </div>
-            @endif
             <div class="table-responsive">
                 <table class="table table-bordered table-striped">
                     <thead>
@@ -64,11 +53,7 @@
                             <td>
                                 <a href="{{ url('admin/authors/'.$item->id.'/edit') }}" class="btn btn-primary btn-sm"><i class="fas fa-edit"></i> Edit</a>
                                 <a href="{{ url('admin/authors/'.$item->id) }}" class="btn btn-success btn-sm"><i class="fas fa-eye"></i> View</a>
-                                {!! Form::open([
-                                    'method'=>'DELETE',
-                                    'url' => ['admin/authors', $item->id],
-                                    'style' => 'display:inline'
-                                ]) !!}
+                                {!! Form::open(['method'=>'DELETE', 'url' => ['admin/authors', $item->id], 'style' => 'display:inline']) !!}
                                 {!! Form::button('<i class="fas fa-trash-alt"></i> Delete', ['class' => 'btn btn-danger btn-sm', 'type' => 'submit']) !!}
                                 {!! Form::close() !!}
                             </td>

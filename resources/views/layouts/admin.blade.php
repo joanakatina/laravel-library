@@ -54,27 +54,32 @@
         <li class="nav-item">
             <a class="nav-link" href="#">
                 <i class="fas fa-fw fa-briefcase"></i>
-                <span>Orders</span></a>
+                <span>Orders</span>
+            </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">
                 <i class="fas fa-fw fa-book"></i>
-                <span>Books</span></a>
+                <span>Books</span>
+            </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ url('/admin/authors') }}">
                 <i class="fas fa-fw fa-user-edit"></i>
-                <span>Authors</span></a>
+                <span>Authors</span>
+            </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">
                 <i class="fas fa-fw fa-building"></i>
-                <span>Publishers</span></a>
+                <span>Publishers</span>
+            </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">
                 <i class="fas fa-fw fa-hat-wizard"></i>
-                <span>Genres</span></a>
+                <span>Genres</span>
+            </a>
         </li>
 
         <!-- Divider -->
@@ -210,13 +215,6 @@
 
 <!-- Custom scripts for all pages-->
 <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
-
-<!-- Page level plugins -->
-<script src="{{ asset('vendor/chart.js/Chart.min.js') }}"></script>
-
-<!-- Page level custom scripts -->
-<script src="{{ asset('js/demo/chart-area-demo.js') }}"></script>
-<script src="{{ asset('js/demo/chart-pie-demo.js') }}"></script>
 
 </body>
 </html>

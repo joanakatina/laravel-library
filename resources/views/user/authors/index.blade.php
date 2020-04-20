@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'About us')
+@section('title', 'Authors')
 
 @section('content')
     @foreach($authors as $item)

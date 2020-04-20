@@ -15,7 +15,7 @@ class AuthorsController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $authors = Author::all()->sortBy("last_name");   // išrūšiuojam autorius pagal pavardę
-        return view('user.authors.index', compact('authors'));
+        $authors = Author::all()->sortBy("last_name");   // naudojam modelį Author; ši eilutė įvykdo SQL užklausą "SELECT * FROM `authors`"; taip pat išrūšiuojam autorius pagal pavardę
+        return view('user.authors.index', compact('authors'));  // nurodom kokiame vaizde bus atvaizduojami duomenys ir perduodam duomenis (masyvą authors) vaizdui
     }
 }

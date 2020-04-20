@@ -5,7 +5,13 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">Create new author</h6>
+            <h6 class="m-0 font-weight-bold text-primary">
+                @if(isset($author))
+                    Edit exist author
+                @else
+                    Create new author
+                @endif
+            </h6>
         </div>
         <div class="card-body">
             {{-- @if ($errors->any())
@@ -18,8 +24,10 @@
 
             {{-- Form::model ir Form::open metodai automatiškai prideda prie formos CSRF žetoną, todėl atskirai jo aprašyti nereikia --}}
             @if(isset($author))
+                {{-- Eamo įrašo redagavimo forma --}}
                 {!! Form::model($author, ['url' => ['admin/authors', $author->id], 'method' => 'patch', 'class' => 'needs-validation', 'novalidate' => '']) !!}
             @else
+                {{-- Naujo įrašo įvedimo forma; metodo nereikia nurodyti, nes pagal nutylėjimą jis yra 'post' --}}
                 {!! Form::open(['url' => 'admin/authors', 'class' => 'needs-validation', 'novalidate' => '']) !!}
             @endif
 
