@@ -24,11 +24,11 @@
 
             {{-- Form::model ir Form::open metodai automatiškai prideda prie formos CSRF žetoną, todėl atskirai jo aprašyti nereikia --}}
             @if(isset($author))
-                {{-- Eamo įrašo redagavimo forma --}}
-                {!! Form::model($author, ['url' => ['admin/authors', $author->id], 'method' => 'patch', 'class' => 'needs-validation', 'novalidate' => '']) !!}
+                {{-- Esamo įrašo redagavimo forma --}}
+                {!! Form::model($author, ['url' => ['admin/authors', $author->id], 'method' => 'patch', 'class' => 'needs-validation']) !!}
             @else
                 {{-- Naujo įrašo įvedimo forma; metodo nereikia nurodyti, nes pagal nutylėjimą jis yra 'post' --}}
-                {!! Form::open(['url' => 'admin/authors', 'class' => 'needs-validation', 'novalidate' => '']) !!}
+                {!! Form::open(['url' => 'admin/authors', 'class' => 'needs-validation']) !!}
             @endif
 
             <div class="form-group">
@@ -36,6 +36,9 @@
                 <div class="col-sm-6">
                     {!! Form::text('first_name', null, ['class' => 'form-control'.($errors->has('first_name') ? ' is-invalid' : ''), 'required' => 'required']) !!}
                     {!! $errors->first('first_name', '<div class="invalid-feedback">:message</div>') !!}
+                    {{-- @foreach ($errors->get('first_name') as $message)
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @endforeach --}}
                 </div>
             </div>
             <div class="form-group">
@@ -65,11 +68,11 @@
                     {!! $errors->first('gender', '<div class="invalid-feedback" style="display: block;">:message</div>') !!}
                 </div>
             </div>
-                <div class="form-group">
-                    <div class="col-sm-offset-3 col-sm-3">
-                        {!! Form::submit('Create', ['class' => 'btn btn-primary form-control']) !!}
-                    </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-3">
+                    {!! Form::submit('Save', ['class' => 'btn btn-primary form-control']) !!}
                 </div>
+            </div>
             {!! Form::close() !!}
         </div>
     </div>

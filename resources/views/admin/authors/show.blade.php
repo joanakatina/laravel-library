@@ -5,7 +5,7 @@
 @section('content')
     <div class="card shadow mb-4">
         <div class="card-header py-3">
-            <a href="" class="btn btn-primary"><i class="fas fa-edit"></i> Edit author</a>
+            <a href="{{ url('/admin/authors/'.$author->id.'/edit') }}" class="btn btn-primary"><i class="fas fa-edit"></i> Edit author</a>
         </div>
         <div class="card-body">
             <div class="table-responsive">

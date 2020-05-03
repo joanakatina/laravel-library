@@ -25,21 +25,49 @@ Route::get('/about', function () {
 Route::get('/contacts', function () {
     return view('pages.contacts');
 });
-Route::get('/admin', function () {
-    return view('admin.dashboard'); //naršyklės lange įvedus svetainės adresą + '/admin' (pvz., http://localhost:8000/admin) bus matomas vaizdas dashboard, esantis kataloge admin
-});
-/*Route::get('/admin/authors', function () {
-    return view('admin.authors.index');
-});*/
+
 Route::get('/authors', 'AuthorsController');
-Route::get('/admin/authors', 'Admin\AuthorsController@index');
-Route::get('/admin/authors/create', 'Admin\AuthorsController@create');
-Route::post('/admin/authors', 'Admin\AuthorsController@store');
-Route::get('/admin/authors/{id}', 'Admin\AuthorsController@show');
-Route::get('/admin/authors/{id}/edit', 'Admin\AuthorsController@edit');
-Route::patch('/admin/authors/{id}', 'Admin\AuthorsController@update');
-Route::delete('/admin/authors/{id}', 'Admin\AuthorsController@destroy');
 
 Auth::routes();
 
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+
+Route::group(['middleware' => ['role:admin|librarian']], function () {
+    Route::get('/admin', function () {
+        return view('admin.dashboard');
+    });
+
+    Route::get('/admin/authors', 'Admin\AuthorsController@index');
+    Route::get('/admin/authors/create', 'Admin\AuthorsController@create');
+    Route::post('/admin/authors', 'Admin\AuthorsController@store');
+    Route::get('/admin/authors/{id}', 'Admin\AuthorsController@show');
+    Route::get('/admin/authors/{id}/edit', 'Admin\AuthorsController@edit');
+    Route::patch('/admin/authors/{id}', 'Admin\AuthorsController@update');
+    Route::delete('/admin/authors/{id}', 'Admin\AuthorsController@destroy');
+});
+
+Route::group(['middleware' => ['role:admin']], function () {
+    Route::get('/admin/users', 'Admin\UsersController@index');
+    Route::get('/admin/users/create', 'Admin\UsersController@create');
+    Route::post('/admin/users', 'Admin\UsersController@store');
+    Route::get('/admin/users/{id}', 'Admin\UsersController@show');
+    Route::get('/admin/users/{id}/edit', 'Admin\UsersController@edit');
+    Route::patch('/admin/users/{id}', 'Admin\UsersController@update');
+    Route::delete('/admin/users/{id}', 'Admin\UsersController@destroy');
+
+    Route::get('/admin/roles', 'Admin\RolesController@index');
+    Route::get('/admin/roles/create', 'Admin\RolesController@create');
+    Route::post('/admin/roles', 'Admin\RolesController@store');
+    Route::get('/admin/roles/{id}', 'Admin\RolesController@show');
+    Route::get('/admin/roles/{id}/edit', 'Admin\RolesController@edit');
+    Route::patch('/admin/roles/{id}', 'Admin\RolesController@update');
+    Route::delete('/admin/roles/{id}', 'Admin\RolesController@destroy');
+
+    Route::get('/admin/permissions', 'Admin\PermissionsController@index');
+    Route::get('/admin/permissions/create', 'Admin\PermissionsController@create');
+    Route::post('/admin/permissions', 'Admin\PermissionsController@store');
+    Route::get('/admin/permissions/{id}', 'Admin\PermissionsController@show');
+    Route::get('/admin/permissions/{id}/edit', 'Admin\PermissionsController@edit');
+    Route::patch('/admin/permissions/{id}', 'Admin\PermissionsController@update');
+    Route::delete('/admin/permissions/{id}', 'Admin\PermissionsController@destroy');
+});

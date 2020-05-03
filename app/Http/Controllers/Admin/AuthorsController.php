@@ -8,6 +8,10 @@ use App\Author;
 
 class AuthorsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +19,8 @@ class AuthorsController extends Controller
      */
     public function index()
     {
+        $this->authorize('index', Author::class);
+
         $authors = Author::all();
         return view('admin.authors.index', compact('authors'));
     }
@@ -26,6 +32,8 @@ class AuthorsController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', Author::class);
+
         return view('admin.authors.form');
     }
 
@@ -37,12 +45,17 @@ class AuthorsController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Author::class);
+
         //validacija
-        $this->validate($request, [
-            'first_name' => 'required|alpha',   // laukas privalomas|galima įvesti tik raides
-            'middle_name' => 'nullable|alpha',  // laukas gali būti tuščias
+        $request->validate([
+            'first_name' => 'required|alpha|min:2',   // laukas privalomas|galima įvesti tik raides
+            'middle_name' => 'nullable|alpha',  // laukas gali būti tuščias|galima įvesti tik raides
             'last_name' => 'required|alpha',
             'gender' => 'required'
+        ],[
+            //'first_name.required' => 'Vardas yra privalomas laukas.',
+            //'first_name.alpha' => 'Vardas gali būti sudarytas tik iš raidžių.'
         ]);
 
         Author::create($request->all());    // įvykdoma SQL užklausa, kuri išsaugo duomenis lentelėje
@@ -59,6 +72,8 @@ class AuthorsController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('show', Author::class);
+
         $author = Author::findOrFail($id);  // įvykdoma SQL užklausa, kuri išrenka vieną įrašą iš lentelės pagal ID reikšmę
         return view('admin.authors.show', compact('author'));
     }
@@ -71,6 +86,8 @@ class AuthorsController extends Controller
      */
     public function edit($id)
     {
+        $this->authorize('edit', Author::class);
+
         $author = Author::findOrFail($id);
         return view('admin.authors.form', compact('author'));
     }
@@ -84,7 +101,9 @@ class AuthorsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
+        $this->authorize('edit', Author::class);
+
+        $request->validate([
             'first_name' => 'required|alpha',
             'middle_name' => 'nullable|alpha',
             'last_name' => 'required|alpha',
@@ -105,6 +124,8 @@ class AuthorsController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', Author::class);
+
         $author = Author::findOrFail($id);
         $author->delete();  // įvykdoma SQL užklausa, kuri pašalina duomenis iš DB
 

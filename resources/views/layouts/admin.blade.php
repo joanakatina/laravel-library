@@ -49,7 +49,7 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Interface
+            Library
         </div>
         <li class="nav-item">
             <a class="nav-link" href="#">
@@ -83,7 +83,28 @@
         </li>
 
         <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        @role('admin')
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            System
+        </div>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('/admin/users') }}">
+                <i class="fas fa-fw fa-user"></i>
+                <span>Users</span>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ url('/admin/roles') }}">
+                <i class="fas fa-fw fa-key"></i>
+                <span>Roles</span>
+            </a>
+        </li>
+        <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block">
+        @endrole
 
         <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
@@ -115,7 +136,7 @@
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">Anonymous</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
                             <img class="img-profile rounded-circle" src="https://cdn.clipart.email/fcc8ead276ddb30d657f23845cd2e028_avatar-icon-of-flat-style-available-in-svg-png-eps-ai-icon-_512-512.png">
                         </a>
                         <!-- Dropdown - User Information -->
@@ -200,7 +221,12 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="login.html">Logout</a>
+                <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                    {{ __('Logout') }}
+                </a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                    @csrf
+                </form>
             </div>
         </div>
     </div>
