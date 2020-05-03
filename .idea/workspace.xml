@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="34f4a2dc-7faf-4ad1-b80c-fae6e95f0081" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -167,7 +167,7 @@
       <workItem from="1587714330878" duration="2843000" />
       <workItem from="1587823858346" duration="894000" />
       <workItem from="1587824766910" duration="11717000" />
-      <workItem from="1588243017520" duration="31191000" />
+      <workItem from="1588243017520" duration="31804000" />
     </task>
     <servers />
   </component>
@@ -219,11 +219,6 @@
           <url>file://$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php</url>
           <line>4</line>
           <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/routes/web.php</url>
-          <line>26</line>
-          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
