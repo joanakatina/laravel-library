@@ -13,18 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');      //naršyklės lange įvedus svetainės adresą (pvz., http://localhost:8000/) bus matomas vaizdas home, esantis kataloge pages
-});
-Route::get('/home', function () {
-    return view('pages.home');      //naršyklės lange įvedus svetainės adresą + '/home' (pvz., http://localhost:8000/home) bus matomas vaizdas home, esantis kataloge pages
-});
-Route::get('/about', function () {
-    return view('pages.about');     //naršyklės lange įvedus svetainės adresą + '/about' (pvz., http://localhost:8000/about) bus matomas vaizdas about, esantis kataloge pages
-});
-Route::get('/contacts', function () {
-    return view('pages.contacts');
-});
+Route::view('/', 'pages.home');      //naršyklės lange įvedus svetainės adresą (pvz., http://localhost:8000/) bus matomas vaizdas home, esantis kataloge pages
+Route::view('/home', 'pages.home');      //naršyklės lange įvedus svetainės adresą + '/home' (pvz., http://localhost:8000/home) bus matomas vaizdas home, esantis kataloge pages
+Route::view('/about', 'pages.about');     //naršyklės lange įvedus svetainės adresą + '/about' (pvz., http://localhost:8000/about) bus matomas vaizdas about, esantis kataloge pages
+Route::view('/contacts','pages.contacts');
 
 Route::get('/authors', 'AuthorsController');
 
@@ -33,9 +25,7 @@ Auth::routes();
 Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
 Route::group(['middleware' => ['role:admin|librarian']], function () {
-    Route::get('/admin', function () {
-        return view('admin.dashboard');
-    });
+    Route::view('/admin', 'admin.dashboard');
 
     Route::get('/admin/authors', 'Admin\AuthorsController@index');
     Route::get('/admin/authors/create', 'Admin\AuthorsController@create');
